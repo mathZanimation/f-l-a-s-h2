@@ -1,0 +1,40 @@
+<script>
+function updateLockButton() {
+  const lockButton = document.getElementById("button");
+  const newOrientation = getOppositeOrientation();
+  lockButton.textContent = `Lock to ${newOrientation}`;
+}
+
+function getOppositeOrientation() {
+  return screen
+    .orientation
+    .type
+    .startsWith("portrait") ? "landscape" : "portrait";
+}
+
+async function rotate(lockButton) {
+  if (!document.fullscreenElement) {
+    await document.documentElement.requestFullscreen();
+  }
+  const newOrientation = getOppositeOrientation();
+  await screen.orientation.lock(newOrientation);
+  updateLockButton(lockButton);
+}
+
+screen.orientation.addEventListener("change", updateLockButton);
+
+window.addEventListener("load", updateLockButton);
+</script>
+
+
+Click
+<button onclick="rotate(this)" id="button">
+  Lock to...
+</button>
+and Fullscreen
+
+
+<script src="https://xxsibxx.github.io/ruffleembedsetup112/ruffle/ruffle.js"></script>
+<div class="swf"dir="ltr" style="text-align: left;" trbidi="on">
+        <embed height="320" pluginspage=" http://www.macromedia.com/go/getflashplayer" src="https://mathzanimation.github.io/f-l-a-s-h2/area and perimeter of shaded.swf" type="application/x-shockwave-flash" width="610"></embed>
+</div> 
