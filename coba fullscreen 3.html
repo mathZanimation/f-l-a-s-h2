@@ -1,0 +1,100 @@
+<script>
+function updateLockButton() {
+  const lockButton = document.getElementById("button");
+  const newOrientation = getOppositeOrientation();
+  lockButton.textContent = `Lock to ${newOrientation}`;
+}
+
+function getOppositeOrientation() {
+  return screen
+    .orientation
+    .type
+    .startsWith("portrait") ? "landscape" : "portrait";
+}
+
+async function rotate(lockButton) {
+  if (!document.fullscreenElement) {
+    await document.documentElement.requestFullscreen();
+  }
+  const newOrientation = getOppositeOrientation();
+  await screen.orientation.lock(newOrientation);
+  updateLockButton(lockButton);
+}
+
+screen.orientation.addEventListener("change", updateLockButton);
+
+window.addEventListener("load", updateLockButton);
+</script>
+
+
+
+<style>
+#container2 {
+    
+    place-content: center;
+
+  }
+
+  #container {
+    
+    display: grid;
+    place-content: center;
+
+  }
+
+</style>
+
+<div id="container2">
+    
+Click
+<button onclick="rotate(this)" id="button">
+  Lock to....
+</button>
+ <button onclick="openFullscreen();">Fullscreen</button>
+</div>
+  
+  <div id="container">
+  
+  
+  
+<script type="text/javascript" src="swfobject.js"></script>
+
+<script type="text/javascript">
+			swfobject.registerObject("myFlashContent", "9.0.0");
+ 
+</script>
+
+
+
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="600" height="365" id="myFlashContent" align="middle">
+				<param name="movie" value="https://mathzanimation.github.io/f-l-a-s-h2/secure_trigonometry2.swf" />
+				<param name="play" value="true" />
+				<param name="menu" value="true" />
+				<param name="quality" value="best" />
+				<param name="scale" value="exactfit" />
+				<param name="wmode" value="window" />
+				<param name="allowfullscreen" value="true" />
+				<!--[if !IE]>-->
+				<object type="application/x-shockwave-flash" data="https://mathzanimation.github.io/f-l-a-s-h2/secure_trigonometry2.swf" width="600" height="365" align="middle">
+					<param name="play" value="true" />
+					<param name="menu" value="true" />
+					<param name="quality" value="best" />
+					<param name="scale" value="exactfit" />
+					<param name="wmode" value="window" />
+					<param name="allowfullscreen" value="true" />
+				<!--<![endif]-->
+
+   </div>
+ 
+  <script>
+var elem = document.getElementById("container");
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+</script>
