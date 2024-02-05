@@ -1,0 +1,65 @@
+<style>
+.fullscreen-wrapper {
+  width: 100%;
+  height: 100%;
+  background: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  .button {
+    margin-bottom: 20px;
+  }
+}
+  </style>
+<script src="//unpkg.com/vue@legacy"></script>
+<script src="//unpkg.com/vue-fullscreen"></script>
+
+<script>
+  
+  Vue.use(VueFullscreen.default);
+
+var Main = {
+  data () {
+    return {
+      fullscreen: false,
+      teleport: true,
+      pageOnly: false
+    }
+  },
+  methods: {
+    toggle () {
+      this.fullscreen = !this.fullscreen
+    }
+  }
+}
+
+var Ctor = Vue.extend(Main);
+new Ctor().$mount("#app");
+  
+  </script>
+  
+  
+  
+
+<div id="app">
+  <div>
+    <label class="checkbox">
+      <input v-model="pageOnly" type="checkbox" name="button"> pageOnly
+    </label>
+    <label class="checkbox">
+      <input v-model="teleport" type="checkbox" name="button"> teleport
+    </label>
+    <fullscreen :fullscreen.sync="fullscreen" :teleport="teleport" :page-only="pageOnly">
+      <div class="fullscreen-wrapper">
+        <button type="button" class="button" @click="toggle">
+          {{ fullscreen ? 'exit fullscreen' : 'request fullscreen' }}
+        </button>
+        <img v-show="!fullscreen" :src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_1600,c_limit/phonepicutres-TA.jpg">
+        <img v-show="fullscreen" :src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_1600,c_limit/phonepicutres-TA.jpg">
+      </div>
+    </fullscreen>
+  </div>
+</div>
